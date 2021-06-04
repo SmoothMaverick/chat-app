@@ -7,15 +7,15 @@ try:
 except socket.error as err:
     print(f"Socket creation failed with error {err}")
 
-port = 80
-hostname = "www.google.com"
+port = 12345
 
-try:
-    host_ip = socket.gethostbyname(hostname)
-except socket.gaierror:
-    print(f"there was an error resolving the {hostname}")
-    sys.exit()
+s.bind(("", port))
+print(f"socket binded to {port}")
+s.listen(5)
+print("socket is listening")
 
-s.connect((host_ip, port))
-
-print(f"The socket has successfully connected to {hostname}")
+while True:
+    conn, addr = s.accept()
+    print(f"Got connection from {addr}")
+    conn.send(str.encode("Thank you for connecting"))
+    conn.close()
