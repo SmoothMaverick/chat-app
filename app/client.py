@@ -17,7 +17,7 @@ while True:
     for socks in read_sockets:
         if socks == client:
             message = socks.recv(2048)
-            print(message)
+            print(str(message))
         else:
             message = sys.stdin.readline()
             client.send(str.encode(message))
